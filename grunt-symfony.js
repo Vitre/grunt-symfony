@@ -93,7 +93,10 @@ var setBundleSass = function (bundle, config) {
         for (var k in bundle.config.sass) {
             var name = bundle.name + '_' + k;
             config.sass[name] = bundle.config.sass[k];
-            sassImports.push({ name: name, files: bundle.config.sass[k].files });
+            sassImports.push({
+                name: name,
+                files: bundle.path + '/**/*.scss'
+            });
             console.log(' - sass:', name);
         }
     }
@@ -108,7 +111,7 @@ var importBundlesConfig = function (config) {
     setBundlesConfig(bundles, config);
 };
 
-var importBundlesWatch = function(config) {
+var importBundlesWatch = function (config) {
     config.watch = config.watch || {};
     for (var k in sassImports) {
         console.log('Setting watch for sass "' + sassImports[k].name + '"');
@@ -117,7 +120,7 @@ var importBundlesWatch = function(config) {
             config.watch[sassImports[k].name + '_sass'] = {
                 files: sassImports[k].files,
                 options: options.watch,
-                tasks: 'sass'
+                tasks: ['sass']
             };
         }
     }
