@@ -1,7 +1,7 @@
 {
   "name": "grunt-symfony",
   "description": "Grunt for Symfony2",
-  "homepage": "http://example.org",
+  "homepage": "https://github.com/Vitre/grunt-symfony",
   "keywords": [
     "util",
     "functional"
