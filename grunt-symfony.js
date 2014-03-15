@@ -1,6 +1,7 @@
 "use strict"
 
 var fs = require('fs');
+var extend = require('node.extend');
 
 //---
 
@@ -18,6 +19,8 @@ var defaults = {
 var options;
 
 var bundles;
+
+var sassImports = [];
 
 /**
  * getBundles
@@ -88,11 +91,11 @@ var setBundleSass = function (bundle, config) {
     }
     if (typeof bundle.config.sass !== 'undefined') {
         for (var k in bundle.config.sass) {
-            var dist = bundle.name + '_' + k;
-            config.sass[dist] = bundle.config.sass[k];
-
+            var name = bundle.name + '_' + k;
+            config.sass[name] = bundle.config.sass[k];
+            sassImports.push({ name: name, files: bundle.config.sass[k].files });
+            console.log(' - sass:', name);
         }
-        console.log(' - sass:', dist);
     }
 };
 
@@ -105,6 +108,21 @@ var importBundlesConfig = function (config) {
     setBundlesConfig(bundles, config);
 };
 
+var importBundlesWatch = function(config) {
+    config.watch = config.watch || {};
+    for (var k in sassImports) {
+        console.log('Setting watch for sass "' + sassImports[k].name + '"');
+        console.log(sassImports[k].files);
+        if (sassImports[k].files) {
+            config.watch[sassImports[k].name + '_sass'] = {
+                files: sassImports[k].files,
+                options: options.watch,
+                tasks: 'sass'
+            };
+        }
+    }
+}
+
 /**
  * Export importBundlesConfig
  * @param config
@@ -113,7 +131,10 @@ exports.importBundlesConfig = function (config, _options) {
     if (typeof _options === 'undefined') {
         options = defaults;
     } else {
-        options = _options;
+        options = extend(true, {}, defaults, _options);
     }
     importBundlesConfig(config);
+    if (options.watch) {
+        importBundlesWatch(config);
+    }
 }

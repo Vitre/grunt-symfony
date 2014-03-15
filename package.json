@@ -32,7 +32,7 @@
   ],
   "readme": "grunt-symfony\r\n=============\r\n\r\ngrunt-symfony\r\n",
   "readmeFilename": "README.md",
-  "_id": "grunt-symfony@1.0.1",
+  "_id": "grunt-symfony@1.0.3",
   "_from": "grunt-symfony@latest",
   "bugs": {
     "url": "https://github.com/Vitre/grunt-symfony/issues"
