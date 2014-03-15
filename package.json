@@ -1,7 +1,7 @@
 {
   "name": "grunt-symfony",
   "description": "Grunt for Symfony2",
-  "homepage": "https://github.com/Vitre/grunt-symfony",
+  "homepage": "http://example.org",
   "keywords": [
     "util",
     "functional"
@@ -16,10 +16,8 @@
   },
   "main": "grunt-symfony.js",
   "version": "1.0.0",
-  "devDependencies": {
-  },
-  "scripts": {
-  },
+  "devDependencies": {},
+  "scripts": {},
   "licenses": [
     {
       "type": "MIT",
@@ -30,8 +28,11 @@
     "grunt-symfony.js",
     "LICENSE"
   ],
-  "readme": "",
+  "readme": "grunt-symfony\r\n=============\r\n\r\ngrunt-symfony\r\n",
   "readmeFilename": "README.md",
   "_id": "grunt-symfony@1.0.0",
-  "_from": "grunt-symfony@latest"
+  "_from": "grunt-symfony@",
+  "bugs": {
+    "url": "https://github.com/Vitre/grunt-symfony/issues"
+  }
 }
