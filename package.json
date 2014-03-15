@@ -16,7 +16,9 @@
   },
   "main": "grunt-symfony.js",
   "version": "1.0.1",
-  "devDependencies": {},
+  "devDependencies": {
+      "node.extend": "latest"
+  },
   "scripts": {},
   "licenses": [
     {
@@ -30,8 +32,8 @@
   ],
   "readme": "grunt-symfony\r\n=============\r\n\r\ngrunt-symfony\r\n",
   "readmeFilename": "README.md",
-  "_id": "grunt-symfony@1.0.0",
-  "_from": "grunt-symfony@",
+  "_id": "grunt-symfony@1.0.1",
+  "_from": "grunt-symfony@latest",
   "bugs": {
     "url": "https://github.com/Vitre/grunt-symfony/issues"
   }

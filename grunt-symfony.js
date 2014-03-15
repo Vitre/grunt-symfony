@@ -4,10 +4,20 @@ var fs = require('fs');
 
 //---
 
-var options = {
+var defaults = {
     src: 'src',
-    configFile: '/Resources/config/grunt.json'
+    configFile: '/Resources/config/grunt.json',
+    watch: {
+        options: {
+            livereload: false
+        }
+    }
+
 };
+
+var options;
+
+var bundles;
 
 /**
  * getBundles
@@ -17,7 +27,7 @@ var options = {
  */
 var getBundles = function (root, r) {
     if (typeof root === 'undefined') {
-        root = options.src;
+        root = defaults.src;
     }
     if (typeof r === 'undefined') {
         r = [];
@@ -29,7 +39,7 @@ var getBundles = function (root, r) {
         if (fs.statSync(path).isDirectory()) {
             if (path.match(/Bundle$/)) {
                 r.push({
-                    name: path.substr(options.src.length + 1, path.length),
+                    name: path.substr(defaults.src.length + 1, path.length),
                     path: path
                 });
             }
@@ -45,12 +55,13 @@ var getBundles = function (root, r) {
  * @param config
  */
 var setBundleConfig = function (bundle, config) {
-    var gruntPath = bundle.path + options.configFile;
+    var gruntPath = bundle.path + defaults.configFile;
     if (fs.existsSync(gruntPath)) {
         var bundleConfig = JSON.parse(fs.readFileSync(gruntPath, 'utf8'));
         if (bundleConfig) {
+            bundle.config = bundleConfig;
             console.log('Importing bundle "' + bundle.name + '"');
-            setBundleSass(bundleConfig, config);
+            setBundleSass(bundle, config);
         }
     }
 };
@@ -72,12 +83,16 @@ var setBundlesConfig = function (bundles, config) {
  * @param config
  */
 var setBundleSass = function (bundle, config) {
-    if (typeof bundle.sass !== 'undefined') {
-        for (var k in bundle.sass) {
-            config.sass[bundle.name + '_' + k] = bundle.sass[k];
+    if (typeof config.sass === 'undefined') {
+        config.sass = {};
+    }
+    if (typeof bundle.config.sass !== 'undefined') {
+        for (var k in bundle.config.sass) {
+            var dist = bundle.name + '_' + k;
+            config.sass[dist] = bundle.config.sass[k];
 
         }
-        console.log('sass:', bundle.sass[k]);
+        console.log(' - sass:', dist);
     }
 };
 
@@ -86,7 +101,7 @@ var setBundleSass = function (bundle, config) {
  * @param config
  */
 var importBundlesConfig = function (config) {
-    var bundles = getBundles();
+    bundles = getBundles();
     setBundlesConfig(bundles, config);
 };
 
@@ -94,6 +109,11 @@ var importBundlesConfig = function (config) {
  * Export importBundlesConfig
  * @param config
  */
-exports.importBundlesConfig = function (config) {
+exports.importBundlesConfig = function (config, _options) {
+    if (typeof _options === 'undefined') {
+        options = defaults;
+    } else {
+        options = _options;
+    }
     importBundlesConfig(config);
 }
