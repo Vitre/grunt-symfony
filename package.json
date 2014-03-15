@@ -15,9 +15,9 @@
     "url": "https://github.com/Vitre/grunt-symfony.git"
   },
   "main": "grunt-symfony.js",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "devDependencies": {
-      "node.extend": "latest"
+    "node.extend": "latest"
   },
   "scripts": {},
   "licenses": [
