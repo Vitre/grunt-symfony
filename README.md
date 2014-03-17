@@ -45,6 +45,7 @@ Gruntfile implementation
 ```javascript
 /*global module:false*/
 
+// grunt-symfony import
 var gruntSymfony = require('grunt-symfony');
 
 module.exports = function (grunt) {
@@ -98,3 +99,21 @@ module.exports = function (grunt) {
 };
 
 ```
+
+- - -
+
+API
+---
+
+### Importing
+
+
+var gruntSymfony = require('grunt-symfony');
+
+### Methods
+
+***gruntSymfony.importBundlesConfig***(object config, object options);
+
+Recursively imports bundle grunt.json configs
+
+- - -
