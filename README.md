@@ -13,6 +13,11 @@ Support
 
   * sass
 
+Install
+-------
+
+    $ npm install grunt-symfony
+
 Bundle config
 -------------
 
@@ -112,7 +117,7 @@ var gruntSymfony = require('grunt-symfony');
 
 ### Methods
 
-***gruntSymfony.importBundlesConfig***(object config, object options);
+**gruntSymfony.importBundlesConfig**(object config, object options);
 
 Recursively imports bundle grunt.json configs
 
