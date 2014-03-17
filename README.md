@@ -6,7 +6,7 @@ Grunt module for Symfony2.
 Features
 --------
 
-  * automatic grunt.json import for bundles src
+  * automatic grunt.json import for src bundles
 
 Support
 -------
@@ -18,7 +18,7 @@ Bundle config
 
 [BUNDLE_SRC]/Resources/config/grunt.json
 
-```
+```json
 {
     "sass": {
         "dist": {
@@ -42,7 +42,7 @@ Bundle config
 Gruntfile implementation
 ------------------------
 
-```
+```javascript
 /*global module:false*/
 
 var gruntSymfony = require('grunt-symfony');
