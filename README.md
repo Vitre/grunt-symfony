@@ -34,7 +34,7 @@ Bundle config
             "files": [
                 {
                     "expand": true,
-                    "cwd": "src/Visy/Visy/Admin/Bundle/Resources/public/scss",
+                    "cwd": "src/[BUNDLE_NAMESPACE]/Resources/public/scss",
                     "src": ["*.scss"],
                     "dest": "web/@/css/admin",
                     "ext": ".css"
