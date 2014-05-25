@@ -114,14 +114,14 @@ var importBundlesConfig = function (config) {
 var importBundlesWatch = function (config) {
     config.watch = config.watch || {};
     for (var k in sassImports) {
-        console.log('Setting watch for sass "' + sassImports[k].name + '"');
-        console.log(sassImports[k].files);
         if (sassImports[k].files) {
+            var task = 'newer:sass:' + sassImports[k].name;
             config.watch[sassImports[k].name + '_sass'] = {
                 files: sassImports[k].files,
                 options: options.watch,
-                tasks: ['sass']
+                tasks: [task]
             };
+            console.log('Setting watch for sass "' + sassImports[k].name + '"', '- files: ' + sassImports[k].files, '- task: ' + task);
         }
     }
 }
