@@ -18,6 +18,12 @@ var defaults = {
 
 var options;
 
+var attr_defaults = {
+    newer: false
+};
+
+var attr;
+
 var bundles;
 
 var sassImports = [];
@@ -106,19 +112,19 @@ var setBundleSass = function (bundle, config) {
  * importBundlesConfig
  * @param config
  */
-var importBundlesConfig = function (config) {
+var importBundlesConfig = function (config, attr) {
     bundles = getBundles();
     setBundlesConfig(bundles, config);
 };
 
-var importBundlesWatch = function (config) {
+var importBundlesWatch = function (config, attr) {
     config.watch = config.watch || {};
     for (var k in sassImports) {
         if (sassImports[k].files) {
-            var task = 'newer:sass:' + sassImports[k].name;
+            var task = (attr.newer ? 'newer:' : '') + ('sass:' + sassImports[k].name);
             config.watch[sassImports[k].name + '_sass'] = {
                 files: sassImports[k].files,
-                options: options.watch,
+                options: options.watch.options,
                 tasks: [task]
             };
             console.log('Setting watch for sass "' + sassImports[k].name + '"', '- files: ' + sassImports[k].files, '- task: ' + task);
@@ -130,14 +136,21 @@ var importBundlesWatch = function (config) {
  * Export importBundlesConfig
  * @param config
  */
-exports.importBundlesConfig = function (config, _options) {
+exports.importBundlesConfig = function (config, _options, attr) {
     if (typeof _options === 'undefined') {
         options = defaults;
     } else {
         options = extend(true, {}, defaults, _options);
     }
-    importBundlesConfig(config);
+
+    if (typeof attr === 'undefined') {
+        attr = attr_defaults;
+    } else {
+        attr = extend(true, {}, attr_defaults, attr);
+    }
+
+    importBundlesConfig(config, attr);
     if (options.watch) {
-        importBundlesWatch(config);
+        importBundlesWatch(config, attr);
     }
 }
