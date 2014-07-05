@@ -6,7 +6,7 @@ Grunt module for Symfony2.
 Features
 --------
 
-  * bundle automatic config import
+  * bundle automatic gruntfile import
 
 Install
 -------
@@ -16,7 +16,7 @@ Install
 Bundle gruntfile
 -------------
 
-[BUNDLE_SRC]/Gruntfile.js
+[BUNDLE_SRC_ROOT]/Gruntfile.js
 
 ```javascript
 module.exports = function (grunt, config, bundle, options) {
@@ -64,22 +64,7 @@ module.exports = function (grunt) {
         // Metadata
         pkg: grunt.file.readJSON('package.json'),
 
-        watch: {
-            js: {
-                files: 'src/**/*.js',
-                options: {
-                    livereload: true
-                }
-            },
-            sass: {
-                files: 'src/**/*.scss',
-                tasks: 'sass',
-                options: {
-                    compass: true,
-                    livereload: true
-                }
-            }
-        }
+        // [...] Your tasks
 
     };
 
@@ -95,12 +80,12 @@ module.exports = function (grunt) {
 
     grunt.initConfig(config);
 
-    // Plugins
+    // Modules
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-sass');
 
     // Tasks
-    grunt.registerTask('default', ['watch']);
+    grunt.registerTask('default', ['build', 'watch']);
     grunt.registerTask('build', ['sass']);
 
 };
@@ -119,7 +104,8 @@ var gruntSymfony = require('grunt-symfony');
 
 ### Methods
 
-**gruntSymfony.importBundles**(object grunt, object config, object options);
+**gruntSymfony.importBundles**(grunt, config, [options]);
+
 Recursively imports bundle Gruntfile.js
 
 #### Options
