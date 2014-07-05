@@ -1,47 +1,50 @@
 grunt-symfony
 =============
 
-Grunt module for Symfony2. 
+Grunt module for Symfony2.
 
 Features
 --------
 
   * bundle automatic config import
 
-Support
--------
-
-  * sass
-
 Install
 -------
 
     $ npm install grunt-symfony
 
-Bundle config
+Bundle gruntfile
 -------------
 
-[BUNDLE_SRC]/Resources/config/grunt.json
+[BUNDLE_SRC]/Gruntfile.js
 
-```json
-{
-    "sass": {
-        "dist": {
-            "options": {
-                "style": "compressed",
-                "compass": true
-            },
-            "files": [
-                {
-                    "expand": true,
-                    "cwd": "src/[BUNDLE_NAMESPACE]/Resources/public/scss",
-                    "src": ["*.scss"],
-                    "dest": "web/@/css/admin",
-                    "ext": ".css"
-            }]
-        }
-    }
-}
+```javascript
+module.exports = function (grunt, config, bundle, options) {
+
+    config.sass = config.sass || {};
+    config.sass[bundle.name + "_dist"] = {
+        "options": {
+            "style": "compressed",
+            "compass": true
+        },
+        "files": [
+            {
+                "expand": true,
+                "cwd": bundle.resources + "/public/scss",
+                "src": ["*.scss"],
+                "dest": options.web + "/admin/@/css",
+                "ext": ".css"
+            }
+        ]
+    };
+
+    config.watch = config.watch || {};
+    config.watch[bundle.name + "_sass"] = {
+        files: bundle.resources + "/public/scss/**/*.scss",
+        tasks: ["sass:" + bundle.name + "_dist"]
+    };
+
+};
 ```
 
 Gruntfile implementation
@@ -80,13 +83,12 @@ module.exports = function (grunt) {
 
     };
 
-    // Symfony config import
-    gruntSymfony.importBundlesConfig(config, {
-        watch: {
-            options: {
-                livereload: true
-            }
-        }
+    // Symfony bundles import
+    gruntSymfony.importBundles(grunt, config, {
+        web: 'web',
+        src: 'src',
+        gruntFile: 'Gruntfile.js',
+        resources: 'Resources'
     });
 
     //---
@@ -117,8 +119,29 @@ var gruntSymfony = require('grunt-symfony');
 
 ### Methods
 
-**gruntSymfony.importBundlesConfig**(object config, object options);
+**gruntSymfony.importBundles**(object grunt, object config, object options);
+Recursively imports bundle Gruntfile.js
 
-Recursively imports bundle grunt.json configs
+#### Options
+
+##### web
+Default: 'web'
+
+Web folder path.
+
+##### src
+Default: 'src'
+
+Resources path.
+
+##### gruntFile
+Default: 'Gruntfile.js'
+
+Bundle Gruntfile filename.
+
+##### resources
+Default: 'Resources'
+
+Bundle resources folder name.
 
 - - -
