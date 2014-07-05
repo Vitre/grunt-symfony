@@ -15,7 +15,7 @@
     "url": "https://github.com/Vitre/grunt-symfony.git"
   },
   "main": "grunt-symfony.js",
-  "version": "1.0.5",
+  "version": "1.1.2",
   "dependencies": {
     "node.extend": "latest"
   },
@@ -23,17 +23,14 @@
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://raw.github.com/jashkenas/underscore/master/LICENSE"
+      "url": "https://raw.githubusercontent.com/Vitre/grunt-symfony/master/LICENSE"
     }
   ],
   "files": [
     "grunt-symfony.js",
     "LICENSE"
   ],
-  "readme": "grunt-symfony\r\n=============\r\n\r\ngrunt-symfony\r\n",
   "readmeFilename": "README.md",
-  "_id": "grunt-symfony@1.0.3",
-  "_from": "grunt-symfony@latest",
   "bugs": {
     "url": "https://github.com/Vitre/grunt-symfony/issues"
   }
