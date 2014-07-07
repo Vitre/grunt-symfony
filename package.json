@@ -3,8 +3,8 @@
   "description": "Grunt for Symfony2",
   "homepage": "https://github.com/Vitre/grunt-symfony",
   "keywords": [
-    "util",
-    "functional"
+    "grunt",
+    "symfony2"
   ],
   "author": {
     "name": "Vít Mádr",
