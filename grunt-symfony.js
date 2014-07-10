@@ -87,7 +87,9 @@ var importBundles = function (config) {
 
 /**
  * Export importBundles
+ * @param _grunt
  * @param config
+ * @param _options
  */
 exports.importBundles = function (_grunt, config, _options) {
     grunt = _grunt;
