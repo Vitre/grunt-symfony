@@ -1,3 +1,11 @@
+/**
+ * grunt-symfony
+ * @author vitre
+ * @licence MIT
+ * @version 1.1.21
+ * @url https://www.npmjs.org/package/grunt-symfony
+ */
+
 "use strict"
 
 var fs = require('fs'),
@@ -23,7 +31,6 @@ var grunt;
  * getBundles
  * @param root
  * @param r
- * @returns {*}
  */
 var getBundles = function (root, r) {
     if (typeof root === 'undefined') {
