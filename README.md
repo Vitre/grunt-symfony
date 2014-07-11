@@ -92,7 +92,6 @@ module.exports = function (grunt) {
 
 ```
 
-- - -
 
 API
 ---
@@ -129,5 +128,29 @@ Bundle Gruntfile filename.
 Default: 'Resources'
 
 Bundle resources folder name.
+
+---
+
+### bundle object
+
+#### Properties
+
+##### name
+Bundle name.
+
+##### name_camelcase
+Bundle name in camelcase.
+
+##### name_web
+Bundle web name.
+
+##### path
+Bundle path.
+
+##### resources
+Bundle resources path.
+
+##### web
+Bundle web path.
 
 - - -

@@ -2,7 +2,7 @@
  * grunt-symfony
  * @author vitre
  * @licence MIT
- * @version 1.1.21
+ * @version 1.1.22
  * @url https://www.npmjs.org/package/grunt-symfony
  */
 
@@ -47,12 +47,17 @@ var getBundles = function (root, r) {
             if (path.match(/Bundle$/)) {
 
                 var name = path.substr(defaults.src.length + 1, path.length);
+                var name_camelcase = name.replace(/\//g, '');
+                var name_web = name_camelcase.toLowerCase().replace(/bundle$/, '');
 
                 var bundle = {
                     name: name,
-                    name_camelcase: name.replace(/\//g, ''),
+                    name_camelcase: name_camelcase,
+                    name_web: name_web,
                     path: path,
-                    resources: path + '/' + defaults.resources
+                    resources: path + '/' + defaults.resources,
+                    web: options.web + '/bundles/' + name_web,
+                    web_public: '/bundles/' + name_web
                 };
 
                 //console.log(bundle);
