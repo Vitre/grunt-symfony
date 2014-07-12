@@ -6,7 +6,14 @@ Grunt module for Symfony2.
 Features
 --------
 
-  * bundle automatic gruntfile import
+  * gruntfile import for src bundles
+
+Links
+-----
+
+**GitHub**: https://github.com/Vitre/grunt-symfony
+
+**NPM**: https://www.npmjs.org/package/grunt-symfony
 
 Install
 -------
@@ -16,7 +23,7 @@ Install
 Bundle gruntfile
 -------------
 
-[BUNDLE_SRC_ROOT]/Gruntfile.js
+[BUNDLE_ROOT]/Gruntfile.js
 
 ```javascript
 module.exports = function (grunt, config, bundle, options) {
@@ -92,65 +99,85 @@ module.exports = function (grunt) {
 
 ```
 
-
 API
 ---
 
 ### Importing
 
-
+```javascript
 var gruntSymfony = require('grunt-symfony');
+```
 
 ### Methods
 
-**gruntSymfony.importBundles**(grunt, config, [options]);
+**gruntSymfony.importBundles**(grunt, config, [options])
 
 Recursively imports bundle Gruntfile.js
 
 #### Options
 
 ##### web
-Default: 'web'
+
+Type: `String` Default: 'web'
 
 Web folder path.
 
 ##### src
-Default: 'src'
+
+Type: `String` Default: 'src'
 
 Resources path.
 
 ##### gruntFile
-Default: 'Gruntfile.js'
+
+Type: `String` Default: 'Gruntfile.js'
 
 Bundle Gruntfile filename.
 
 ##### resources
-Default: 'Resources'
+
+Type: `String` Default: 'Resources'
 
 Bundle resources folder name.
 
----
+
 
 ### bundle object
 
 #### Properties
 
 ##### name
+
+Type: `String`
+
 Bundle name.
 
 ##### name_camelcase
+
+Type: `String`
+
 Bundle name in camelcase.
 
 ##### name_web
+
+Type: `String`
+
 Bundle web name.
 
 ##### path
+
+Type: `String`
+
 Bundle path.
 
 ##### resources
+
+Type: `String`
+
 Bundle resources path.
 
 ##### web
-Bundle web path.
 
-- - -
+Type: `String`
+
+Bundle web path.
