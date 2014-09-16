@@ -3,6 +3,8 @@ grunt-symfony
 
 Grunt module for Symfony2.
 
+![Monthly downloads](http://img.shields.io/npm/dm/grunt-symfony.svg)
+
 Features
 --------
 
