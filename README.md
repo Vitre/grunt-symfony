@@ -1,9 +1,9 @@
-grunt-symfony
+grunt-symfony ![Monthly downloads](http://img.shields.io/npm/dm/grunt-symfony.svg)
 =============
 
 Grunt module for Symfony2.
 
-![Monthly downloads](http://img.shields.io/npm/dm/grunt-symfony.svg)
+[![NPM](https://nodei.co/npm/grunt-symfony.png)](https://nodei.co/npm/grunt-symfony/)
 
 Features
 --------
