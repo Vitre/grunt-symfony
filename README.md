@@ -205,4 +205,4 @@ Bundle web path.
 Release 1.1.23
 -------------
 * Bundle object new names (`name_dashed`, `name_underscore`)
-* Grunt config `laravel` registry `config.laravel: { packages: {...}, dist_tasks: [...], dev_tasks: [...] } `
+* Grunt config `symfony` registry `config.symfony: { bundles: {...}, dist_tasks: [...], dev_tasks: [...] } `
