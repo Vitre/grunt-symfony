@@ -101,6 +101,24 @@ module.exports = function (grunt) {
 
 ```
 
+Gruntfile config registry
+-------------------------
+Task stores some information into global grunt config variable. You can use it for custom task creation.
+
+`config.symfony: { bundles: {}, dist_tasks: [], dev_tasks: [] } `
+
+### Task creation example
+
+#### Bundle gruntfile
+```javascript
+config.symfony.dev_tasks.push('uglify:' + bundle.name + '_dev');
+```
+
+#### Global gruntfile
+```javascript
+grunt.registerTask('build', [].concat(['sass'], config.symfony.dist_tasks, ['uglify']));
+```
+
 API
 ---
 
@@ -144,7 +162,7 @@ Bundle resources folder name.
 
 
 
-### bundle object
+### Bundle object
 
 #### Properties
 
@@ -183,3 +201,8 @@ Bundle resources path.
 Type: `String`
 
 Bundle web path.
+
+Release 1.1.23
+-------------
+* Bundle object new names (`name_dashed`, `name_underscore`)
+* Grunt config `laravel` registry `config.laravel: { packages: {...}, dist_tasks: [...], dev_tasks: [...] } `

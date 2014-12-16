@@ -2,7 +2,7 @@
  * grunt-symfony
  * @author vitre
  * @licence MIT
- * @version 1.1.22
+ * @version 1.1.23
  * @url https://www.npmjs.org/package/grunt-symfony
  */
 
@@ -48,21 +48,26 @@ var getBundles = function (root, r) {
 
                 var name = path.substr(defaults.src.length + 1, path.length);
                 var name_camelcase = name.replace(/\//g, '');
+                var name_dashed = name.replace(/\//g, '-');
+                var name_underscore = name.replace(/\//g, '_').replace(/-/g, '_');
                 var name_web = name_camelcase.toLowerCase().replace(/bundle$/, '');
 
                 var bundle = {
                     name: name,
                     name_camelcase: name_camelcase,
+                    name_dashed: name_dashed,
+                    name_underscore: name_underscore,
                     name_web: name_web,
                     path: path,
                     resources: path + '/' + defaults.resources,
                     web: options.web + '/bundles/' + name_web,
-                    web_public: '/bundles/' + name_web
+                    web_public: '/bundles/' + name_web,
+                    gruntFile: path + '/' + defaults.gruntFile
                 };
 
-                //console.log(bundle);
-
-                r.push(bundle);
+                if (fs.existsSync(bundle.gruntFile)) {
+                    r.push(bundle);
+                }
             }
             getBundles(path, r);
         }
@@ -92,8 +97,13 @@ var importBundle = function (bundle, config) {
  */
 var importBundles = function (config) {
     bundles = getBundles();
+
     for (var i = 0; i < bundles.length; i++) {
+
+        config.symfony.bundles[bundles[i].name_underscore] = bundles[i];
+
         importBundle(bundles[i], config);
+
     }
 };
 
@@ -110,5 +120,12 @@ exports.importBundles = function (_grunt, config, _options) {
     } else {
         options = extend(true, {}, defaults, _options);
     }
+
+    config.symfony = extend(config.symfony, {
+        bundles: {},
+        dist_tasks: [],
+        dev_tasks: []
+    });
+
     importBundles(config);
 }
