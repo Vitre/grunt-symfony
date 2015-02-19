@@ -34,7 +34,7 @@ var grunt;
  */
 var getBundles = function (root, r) {
     if (typeof root === 'undefined') {
-        root = defaults.src;
+        root = options.src;
     }
     if (typeof r === 'undefined') {
         r = [];
@@ -46,7 +46,7 @@ var getBundles = function (root, r) {
         if (fs.statSync(path).isDirectory()) {
             if (path.match(/Bundle$/)) {
 
-                var name = path.substr(defaults.src.length + 1, path.length);
+                var name = path.substr(options.src.length + 1, path.length);
                 var name_camelcase = name.replace(/\//g, '');
                 var name_dashed = name.replace(/\//g, '-');
                 var name_underscore = name.replace(/\//g, '_').replace(/-/g, '_');
@@ -59,10 +59,10 @@ var getBundles = function (root, r) {
                     name_underscore: name_underscore,
                     name_web: name_web,
                     path: path,
-                    resources: path + '/' + defaults.resources,
+                    resources: path + '/' + options.resources,
                     web: options.web + '/bundles/' + name_web,
                     web_public: '/bundles/' + name_web,
-                    gruntFile: path + '/' + defaults.gruntFile
+                    gruntFile: path + '/' + options.gruntFile
                 };
 
                 if (fs.existsSync(bundle.gruntFile)) {
@@ -81,7 +81,7 @@ var getBundles = function (root, r) {
  * @param config
  */
 var importBundle = function (bundle, config) {
-    var gruntFile = bundle.path + '/' + defaults.gruntFile;
+    var gruntFile = bundle.path + '/' + options.gruntFile;
     if (fs.existsSync(gruntFile)) {
         var filePath = path.resolve(gruntFile);
 
